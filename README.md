@@ -82,14 +82,13 @@ By default, the subclass names will be stored in a field named `subclass_name`. 
 ELOQUENT_STI_SUBCLASS_FIELD=your_subclass_field_name_here
 ```
 
-or publishing and updating the package configuration file
+or publishing and updating the package configuration file in app/config.eloquent-sti.php
 
 ```bash
 php artisan vendor:publish --provider="JonnyPickett\EloquentSTI\ServiceProvider"
 ```
 
 ```php
-// app/config/eloquent-sti.php
 <?php
 
 return [
