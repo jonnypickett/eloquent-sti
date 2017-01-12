@@ -19,7 +19,10 @@ trait SingleTableInheritance
      */
     public function hasValidSubclassField()
     {
-        return (isset($this->subclassField) && !is_null($this->subclassField)) || config('eloquent-sti.subclass_field');
+        if (property_exists($this, 'subclassField')) {
+            return isset($this->subclassField);
+        }
+        return (bool) config('eloquent-sti.subclass_field');
     }
 
     /**

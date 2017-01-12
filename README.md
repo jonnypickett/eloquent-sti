@@ -39,8 +39,6 @@ class Animal extends Model
 {
     use SingleTableInheritance;
     
-    protected $table = 'animals';
-    
     protected $fillable = [
         'subclass_name',
         ...
@@ -115,7 +113,7 @@ or can be changed on a per model basis by adding a `$subclassNameField` property
 ```php
 class Animal extends Model
 {
-    protected $subclassFieldName = 'your_subclass_field_name_here'
+    protected $subclassField = 'your_subclass_field_name_here'
 }
 ```
 
