@@ -32,12 +32,14 @@ Schema::table('animals', function(Blueprint $table)
 }
 ```
 
-Once this field is added to your database table, you will need to add the `SingleTableInheritance` trait to the parent model, and add the subclass name field to its `$fillable` array
+Once this field is added to your database table, you will need to add the `SingleTableInheritance` trait, make sure to specify the table property, and add the subclass name field to the `$fillable` array all on the parent model definition
 
 ``` php
 class Animal extends Model
 {
     use SingleTableInheritance;
+    
+    protected $table = 'animals';
     
     protected $fillable = [
         'subclass_name',

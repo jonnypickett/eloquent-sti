@@ -3,45 +3,15 @@
 namespace JonnyPickett\EloquentSTI;
 
 use Illuminate\Database\Eloquent\Model;
-use Orchestra\Testbench\TestCase;
+use JonnyPickett\EloquentSTI\Models\Animal;
+use JonnyPickett\EloquentSTI\Models\Ball;
+use JonnyPickett\EloquentSTI\Models\Cat;
+use JonnyPickett\EloquentSTI\Models\Dog;
+use JonnyPickett\EloquentSTI\Models\Owner;
+use JonnyPickett\EloquentSTI\Models\Vehicle;
 
-class Ball extends Model
+class SingleTableInheritanceTest extends SingleTableInheritanceTestCase
 {
-
-}
-
-class Animal extends Model
-{
-    use SingleTableInheritance;
-}
-
-class Dog extends Animal
-{
-
-}
-
-class Vehicle extends Model
-{
-    use SingleTableInheritance;
-
-    protected $subclassField = null;
-
-    /**
-     * @param null $subclassField
-     */
-    public function setSubclassField($subclassField)
-    {
-        $this->subclassField = $subclassField;
-    }
-}
-
-class SingleTableInheritanceTest extends TestCase
-{
-    protected function getEnvironmentSetUp($app)
-    {
-        $app['config']->set('eloquent-sti.subclass_field', 'subclass_name');
-    }
-
     /**
      * Test that SingleTableInheritance has all necessary methods
      */
@@ -98,9 +68,9 @@ class SingleTableInheritanceTest extends TestCase
     /**
      * Test that Model does not have SingleTableInheritance specific methods
      */
-    public function testModelDoesNotHaveSingleTableInheritanceMethods()
+    public function testModelDoesNotHaveSingleTableInheritanceSpecificMethods()
     {
-        $mock = $this->createMock(Ball::class);
+        $mock = $this->createMock(Model::class);
 
         $this->assertFalse(
             method_exists($mock, 'isSubclass'),
@@ -120,6 +90,39 @@ class SingleTableInheritanceTest extends TestCase
         $this->assertFalse(
             method_exists($mock, 'usesSTI'),
             'Model has \'usesSTI\' method.'
+        );
+
+        $this->assertFalse(
+            method_exists($mock, 'mapData'),
+            'Model has \'mapData\' method.'
+        );
+    }
+
+    /**
+     * Test that Model has necessary methods to overload
+     */
+    public function testModelHasNecessaryMethodsToOverload()
+    {
+        $mock = $this->createMock(Model::class);
+
+        $this->assertTrue(
+            method_exists($mock, 'newFromBuilder'),
+            'Model does not have \'newFromBuilder\' method.'
+        );
+
+        $this->assertTrue(
+            method_exists($mock, 'newQuery'),
+            'Model does not have \'newQuery\' method.'
+        );
+
+        $this->assertTrue(
+            method_exists($mock, 'save'),
+            'Model does not have \'save\' method.'
+        );
+
+        $this->assertTrue(
+            method_exists($mock, 'update'),
+            'Model does not have \'update\' method.'
         );
     }
 
@@ -211,7 +214,6 @@ class SingleTableInheritanceTest extends TestCase
     public function testChildIsSubclassOfParent()
     {
         $dog = new Dog();
-
         $this->assertInstanceOf(Animal::class, $dog);
     }
 
@@ -221,7 +223,73 @@ class SingleTableInheritanceTest extends TestCase
     public function testChildIsSubclass()
     {
         $dog = new Dog();
-
         $this->assertTrue($dog->isSubclass());
+    }
+
+    /**
+     * Test that parent find method returns instance of child
+     */
+    public function testParentFindMethodReturnsInstanceOfChild()
+    {
+        $dog = Animal::find(1);
+        $this->assertInstanceOf(Dog::class, $dog);
+
+        $cat = Animal::find(2);
+        $this->assertInstanceOf(Cat::class, $cat);
+    }
+
+    /**
+     * Test that child find method returns instance of child or null depending
+     * on if subclass_name matches calling child class
+     */
+    public function testChildIsInstanceOfSubclass()
+    {
+        $dog = Dog::find(1);
+        $this->assertInstanceOf(Dog::class, $dog);
+
+        $dog = Dog::find(2);
+        $this->assertNull($dog);
+
+        $cat = Cat::find(1);
+        $this->assertNull($cat);
+
+        $cat = Cat::find(2);
+        $this->assertInstanceOf(Cat::class, $cat);
+    }
+
+    /**
+     * Test that parent collection returns collection with correct child instances
+     */
+    public function testParentCollectionReturnsCorrectChildInstances()
+    {
+        $animals = Animal::all();
+        $this->assertInstanceOf(Dog::class, $animals->first());
+        $this->assertInstanceOf(Cat::class, $animals->last());
+    }
+
+    /**
+     * Test belongsToMany relationships return correct models
+     */
+    public function testBelongsToManyRelationshipReturnsCorrectModels()
+    {
+        $owner = Owner::first();
+        $this->assertEquals(2, $owner->animals->count());
+        $this->assertInstanceOf(Dog::class, $owner->animals->first());
+        $this->assertInstanceOf(Cat::class, $owner->animals->last());
+        $this->assertEquals(1, $owner->dogs->count());
+        $this->assertInstanceOf(Dog::class, $owner->dogs->first());
+        $this->assertEquals(1, $owner->cats->count());
+        $this->assertInstanceOf(Cat::class, $owner->cats->last());
+        $this->assertEquals(1, $owner->balls->count());
+        $this->assertInstanceOf(Ball::class, $owner->balls->first());
+    }
+
+    /**
+     * Test that non Single Table Inheritance model find method returns instance of self
+     */
+    public function testNonSingleTableInheritanceModelFindMethodReturnsInstanceOfSelf()
+    {
+        $ball = Ball::find(1);
+        $this->assertInstanceOf(Ball::class, $ball);
     }
 }
