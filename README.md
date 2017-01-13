@@ -123,6 +123,10 @@ class Animal extends Model
 }
 ```
 
+## Credit
+
+Inspiration for this package came way back when I came across [this Laravel.io forum post][link-laravelio-post] by [Shawn McCool][link-shawn-mccool]
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
@@ -145,3 +149,5 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-contributors]: ../../contributors
 [link-built-for]: http://laravel.com
 [link-style-ci]: https://styleci.io/repos/78478485
+[link-laravelio-post]: http://laravel.io/forum/02-17-2014-eloquent-single-table-inheritance
+[link-shawn-mccool]: https://github.com/ShawnMcCool
