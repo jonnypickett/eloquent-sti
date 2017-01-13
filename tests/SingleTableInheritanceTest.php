@@ -13,7 +13,7 @@ use JonnyPickett\EloquentSTI\Models\Vehicle;
 class SingleTableInheritanceTest extends SingleTableInheritanceTestCase
 {
     /**
-     * Test that SingleTableInheritance has all necessary methods
+     * Test that SingleTableInheritance has all necessary methods.
      */
     public function testSingleTableInheritanceHasNecessaryMethods()
     {
@@ -66,7 +66,7 @@ class SingleTableInheritanceTest extends SingleTableInheritanceTestCase
     }
 
     /**
-     * Test that Model does not have SingleTableInheritance specific methods
+     * Test that Model does not have SingleTableInheritance specific methods.
      */
     public function testModelDoesNotHaveSingleTableInheritanceSpecificMethods()
     {
@@ -99,7 +99,7 @@ class SingleTableInheritanceTest extends SingleTableInheritanceTestCase
     }
 
     /**
-     * Test that Model has necessary methods to overload
+     * Test that Model has necessary methods to overload.
      */
     public function testModelHasNecessaryMethodsToOverload()
     {
@@ -127,7 +127,7 @@ class SingleTableInheritanceTest extends SingleTableInheritanceTestCase
     }
 
     /**
-     * Test that Parent class is not subclass
+     * Test that Parent class is not subclass.
      */
     public function testParentIsNotSubclass()
     {
@@ -137,7 +137,7 @@ class SingleTableInheritanceTest extends SingleTableInheritanceTestCase
     }
 
     /**
-     * Test that hasValidSubclassField returns correct value
+     * Test that hasValidSubclassField returns correct value.
      */
     public function testHasValidSubclassField()
     {
@@ -162,7 +162,7 @@ class SingleTableInheritanceTest extends SingleTableInheritanceTestCase
     }
 
     /**
-     * Test that getSubclassField returns correct value
+     * Test that getSubclassField returns correct value.
      */
     public function testGetSubclassField()
     {
@@ -187,7 +187,7 @@ class SingleTableInheritanceTest extends SingleTableInheritanceTestCase
     }
 
     /**
-     * Test that usesSTI returns correct value
+     * Test that usesSTI returns correct value.
      */
     public function testUsesSTI()
     {
@@ -209,7 +209,7 @@ class SingleTableInheritanceTest extends SingleTableInheritanceTestCase
     }
 
     /**
-     * Test that Child is subclass of Parent
+     * Test that Child is subclass of Parent.
      */
     public function testChildIsSubclassOfParent()
     {
@@ -218,7 +218,7 @@ class SingleTableInheritanceTest extends SingleTableInheritanceTestCase
     }
 
     /**
-     * Test that Child is subclass
+     * Test that Child is subclass.
      */
     public function testChildIsSubclass()
     {
@@ -227,7 +227,7 @@ class SingleTableInheritanceTest extends SingleTableInheritanceTestCase
     }
 
     /**
-     * Test that parent find method returns instance of child
+     * Test that parent find method returns instance of child.
      */
     public function testParentFindMethodReturnsInstanceOfChild()
     {
@@ -240,7 +240,7 @@ class SingleTableInheritanceTest extends SingleTableInheritanceTestCase
 
     /**
      * Test that child find method returns instance of child or null depending
-     * on if subclass_name matches calling child class
+     * on if subclass_name matches calling child class.
      */
     public function testChildIsInstanceOfSubclass()
     {
@@ -258,7 +258,7 @@ class SingleTableInheritanceTest extends SingleTableInheritanceTestCase
     }
 
     /**
-     * Test that parent collection returns collection with correct child instances
+     * Test that parent collection returns collection with correct child instances.
      */
     public function testParentCollectionReturnsCorrectChildInstances()
     {
@@ -268,7 +268,7 @@ class SingleTableInheritanceTest extends SingleTableInheritanceTestCase
     }
 
     /**
-     * Test belongsToMany relationships return correct models
+     * Test belongsToMany relationships return correct models.
      */
     public function testBelongsToManyRelationshipReturnsCorrectModels()
     {
@@ -285,7 +285,7 @@ class SingleTableInheritanceTest extends SingleTableInheritanceTestCase
     }
 
     /**
-     * Test that non Single Table Inheritance model find method returns instance of self
+     * Test that non Single Table Inheritance model find method returns instance of self.
      */
     public function testNonSingleTableInheritanceModelFindMethodReturnsInstanceOfSelf()
     {

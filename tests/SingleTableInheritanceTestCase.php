@@ -43,38 +43,38 @@ class SingleTableInheritanceTestCase extends TestCase
     }
 
     /**
-     * run package test database migrations
+     * run package test database migrations.
      *
      * @return void
      */
     public function migrate()
     {
-        $fileSystem = new Filesystem;
-        $classFinder = new ClassFinder;
+        $fileSystem = new Filesystem();
+        $classFinder = new ClassFinder();
 
-        foreach ($fileSystem->files(__DIR__ . "/migrations") as $file) {
+        foreach ($fileSystem->files(__DIR__.'/migrations') as $file) {
             $fileSystem->requireOnce($file);
             $migrationClass = $classFinder->findClass($file);
 
-            (new $migrationClass)->up();
+            (new $migrationClass())->up();
         }
     }
 
     /**
-     * run package test database seeds
+     * run package test database seeds.
      *
      * @return void
      */
     public function seedDatabase()
     {
-        $fileSystem = new Filesystem;
-        $classFinder = new ClassFinder;
+        $fileSystem = new Filesystem();
+        $classFinder = new ClassFinder();
 
-        foreach ($fileSystem->files(__DIR__ . "/seeds") as $file) {
+        foreach ($fileSystem->files(__DIR__.'/seeds') as $file) {
             $fileSystem->requireOnce($file);
             $migrationClass = $classFinder->findClass($file);
 
-            (new $migrationClass)->run();
+            (new $migrationClass())->run();
         }
     }
 }

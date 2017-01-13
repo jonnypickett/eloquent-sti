@@ -25,12 +25,12 @@ class DatabaseSeeder extends Seeder
 
         DB::table('animals_owners')->insert([
             'animal_id' => 1,
-            'owner_id' => 1,
+            'owner_id'  => 1,
         ]);
 
         DB::table('animals_owners')->insert([
             'animal_id' => 2,
-            'owner_id' => 1,
+            'owner_id'  => 1,
         ]);
 
         DB::table('balls')->insert([
@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('balls_owners')->insert([
-            'ball_id' => 1,
+            'ball_id'  => 1,
             'owner_id' => 1,
         ]);
     }

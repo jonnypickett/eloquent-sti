@@ -5,7 +5,7 @@ namespace JonnyPickett\EloquentSTI;
 trait SingleTableInheritance
 {
     /**
-     * Check that class is a subclass
+     * Check that class is a subclass.
      *
      * @return bool
      */
@@ -22,6 +22,7 @@ trait SingleTableInheritance
         if (property_exists($this, 'subclassField')) {
             return isset($this->subclassField);
         }
+
         return (bool) config('eloquent-sti.subclass_field');
     }
 
@@ -33,7 +34,6 @@ trait SingleTableInheritance
         if ($this->hasValidSubclassField()) {
             return $this->subclassField ?: config('eloquent-sti.subclass_field');
         }
-        return null;
     }
 
     /**
@@ -45,7 +45,7 @@ trait SingleTableInheritance
     }
 
     /**
-     * If no subclass is defined, function as normal
+     * If no subclass is defined, function as normal.
      *
      * @param array $attributes
      *
@@ -57,21 +57,22 @@ trait SingleTableInheritance
             return $this->newInstance();
         }
 
-        return new $attributes[$this->getSubClassField()];
+        return new $attributes[$this->getSubClassField()]();
     }
 
     /**
      * Instead of using $this->newInstance(), call
-     * newInstance() on the object from mapData
+     * newInstance() on the object from mapData.
      *
      * @param array $attributes
      *
      * @return mixed
      */
-    public function newFromBuilder($attributes = array(), $connection = null)
+    public function newFromBuilder($attributes = [], $connection = null)
     {
-        $instance = $this->mapData((array) $attributes)->newInstance(array(), true);
+        $instance = $this->mapData((array) $attributes)->newInstance([], true);
         $instance->setRawAttributes((array) $attributes, true);
+
         return $instance;
     }
 
@@ -90,7 +91,7 @@ trait SingleTableInheritance
     }
 
     /**
-     * Ensure that the subclass field is assigned on save
+     * Ensure that the subclass field is assigned on save.
      *
      * @param array $options
      *
@@ -101,14 +102,16 @@ trait SingleTableInheritance
         if ($this->hasValidSubclassField()) {
             $this->attributes[$this->getSubClassField()] = get_class($this);
         }
+
         return parent::save($options);
     }
 
     /**
      * Update the model in the database.
      *
-     * @param  array  $attributes
-     * @param  array  $options
+     * @param array $attributes
+     * @param array $options
+     *
      * @return bool
      */
     public function update(array $attributes = [], array $options = [])
