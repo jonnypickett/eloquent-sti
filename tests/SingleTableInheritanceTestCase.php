@@ -33,7 +33,7 @@ class SingleTableInheritanceTestCase extends TestCase
     {
         parent::setUp();
 
-        $this->app['config']->set('database.default','sqlite');
+        $this->app['config']->set('database.default', 'sqlite');
         $this->app['config']->set('database.connections.sqlite.database', ':memory:');
 
         $this->app['config']->set('eloquent-sti.subclass_field', 'subclass_name');
@@ -52,8 +52,7 @@ class SingleTableInheritanceTestCase extends TestCase
         $fileSystem = new Filesystem;
         $classFinder = new ClassFinder;
 
-        foreach($fileSystem->files(__DIR__ . "/migrations") as $file)
-        {
+        foreach ($fileSystem->files(__DIR__ . "/migrations") as $file) {
             $fileSystem->requireOnce($file);
             $migrationClass = $classFinder->findClass($file);
 
@@ -71,8 +70,7 @@ class SingleTableInheritanceTestCase extends TestCase
         $fileSystem = new Filesystem;
         $classFinder = new ClassFinder;
 
-        foreach($fileSystem->files(__DIR__ . "/seeds") as $file)
-        {
+        foreach ($fileSystem->files(__DIR__ . "/seeds") as $file) {
             $fileSystem->requireOnce($file);
             $migrationClass = $classFinder->findClass($file);
 
