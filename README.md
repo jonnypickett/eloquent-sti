@@ -114,7 +114,7 @@ return [
 
 ```
 
-or can be changed on a per model basis by adding a `$subclassNameField` property to your parent model
+or can be changed on a per model basis by adding a `$subclassField` property to your parent model
 
 ```php
 class Animal extends Model
