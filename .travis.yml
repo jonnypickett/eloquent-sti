@@ -5,11 +5,11 @@ php:
   - 7.0
   - 7.1
 
+install:
+  - travis_retry composer install --no-interaction --prefer-dist
+
 before_script:
   - travis_retry composer self-update
 
-before_install:
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.6" ]]; then composer require --dev --no-update phpunit/phpunit 5.7.5; fi
-
-install:
-  - travis_retry composer install --no-interaction --prefer-dist
+script:
+  - vendor/bin/phpunit
