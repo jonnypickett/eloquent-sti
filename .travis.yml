@@ -1,15 +1,14 @@
 language: php
-
 php:
-  - 5.6
-  - 7.0
-  - 7.1
-
+- 5.6
+- 7.0
+- 7.1
 install:
-  - travis_retry composer install --no-interaction --prefer-dist
-
+- travis_retry composer install --no-interaction --prefer-dist
 before_script:
-  - travis_retry composer self-update
-
+- travis_retry composer self-update
 script:
-  - vendor/bin/phpunit
+- vendor/bin/phpunit
+notifications:
+  slack:
+    secure: L7wwh1wv+mAj96QuIOnWSmiuKq+2X2wdW6R6V2rC8WJ49n3mbAdsoeJgp3AJYq4lZbrFylIqtLHXmaKEBSCuN9wzdk2WKvAyBCzSpT4iO1JjAu32dhYaY2+X5XSw2VyBecmAjhUg8jDiaWZny2VoDsXxE3ins/qYk9tb2mtIz/EMKKouyFW5i1SLMGay7WAz9DAUIcdg0S4+69yQfQyQEYPd3H0WwtrYSezXrd1jc0VG6EwGefIDt8BQAn7/2mddrvpD3O1mQN1kNSU1jwRiH5ev7ZUziV+K+gKU2x/SEeFZmilLswN3O1apVh+mQ/wVKpFQL/2KqZ7HCphvDDiqk0qstc8RDYrrvJ9YMEZ4VTx1ymMDtzwmhvUANOfTazEQnxGJulOt+srhQJ8O3N3kRVXV+nJeft98et05Cu2au4tMYkZ7FdI0NjEOsjx8LlonK7yZRBrSXRVeOyVjIPotnz00KDgQ1eZykTtW/nDnWfknNolhJv3pDCNY1lj38ve8aKU1nN/CO5Xr9BHyRy4/08hCov7hCMdIaNX9w0jnN2p/JEZ65lbvvlZvIG0FqVKOa+084oi4e6MCQ95Jm/a1CRpkCGLurJs1KByHEAzWXF0opiYSc0fOIwwJ+IKFaN/JA07hC0l2ZBxZzbamOlxkRybJcGNLMXDm1xnVFBjq7/0=
